@@ -32,15 +32,16 @@ class Exget():
 		self.links = map(lambda x: x['href'], self.soup.findAll('a',
 			href=re.compile(self.file_pattern)))
 		files = os.listdir(os.path.expanduser(self.save_path))
-		self.links = map(lambda x: x, (filter(lambda x: x not in
+		self.links = map(lambda x: x, (filter(lambda x: x.split('/')[-1] not in
 			files, self.links)))
 
+		print("Downloading files for %s"%(self.__class__.__name__))
 		for link in self.links:
 			self.__download(link)
 
 	def __download(self, link):
 		remote = urllib2.urlopen(self.base_url + link)
-		with open(os.path.expanduser(self.save_path) + link, 'w') as f:
+		with open(os.path.expanduser(self.save_path) + link.split('/')[-1], 'w') as f:
 			stdout.write("Downloading %s... "%(link))
 			f.write(remote.read())
 			remote.close()
