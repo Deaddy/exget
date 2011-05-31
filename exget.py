@@ -11,7 +11,16 @@ site_directory = path[0]+"/sites/"
 class Exget():
 	"""The base class every plugin inherits from. If you want one global
 	save_path, you can provide it here and keep it out of your class
-	definitions"""
+	definitions.
+	
+	toc_url is the url where you can find the "table of contents", i.e. where
+	you can find the links.
+	
+	base_url is the base_url for the downloadable files
+	
+	file_pattern is a regex for defining which files to download
+	
+	save_path is the target directory"""
 	toc_url = ""
 	base_url = ""
 	file_pattern = ""
